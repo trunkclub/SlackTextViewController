@@ -1737,6 +1737,11 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     return nil;
 }
 
+- (BOOL)shouldCacheText
+{
+    return [self keyForTextCaching];
+}
+
 - (NSString *)slk_keyForPersistency
 {
     NSString *key = [self keyForTextCaching];
@@ -1745,9 +1750,8 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 
 - (void)slk_reloadTextView
 {
+    if (![self shouldCacheText]) { return; }
     NSString *key = [self slk_keyForPersistency];
-    if (!key) return;
-    
     NSString *cachedText = [[NSUserDefaults standardUserDefaults] objectForKey:key];
     
     if (self.textView.text.length == 0 || cachedText.length > 0) {
@@ -1769,7 +1773,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 {
     NSString *key = [self slk_keyForPersistency];
 
-    if (!key || key.length == 0) {
+    if (![self shouldCacheText] || !key || key.length == 0) {
         return;
     }
     
