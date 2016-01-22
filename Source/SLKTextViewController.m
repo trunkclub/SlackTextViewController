@@ -1305,11 +1305,6 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 
 - (void)slk_willShowOrHideKeyboard:(NSNotification *)notification
 {
-    // Skips if the view isn't visible.
-    if (!self.view.window) {
-        return;
-    }
-
     // Skips if it is presented inside of a popover.
     if (self.isPresentedInPopover) {
         return;
@@ -1398,11 +1393,6 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 
 - (void)slk_didShowOrHideKeyboard:(NSNotification *)notification
 {
-    // Skips if the view isn't visible
-    if (!self.view.window) {
-        return;
-    }
-
     // Skips if it is presented inside of a popover
     if (self.isPresentedInPopover) {
         return;
