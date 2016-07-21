@@ -33,5 +33,4 @@ FOUNDATION_EXPORT const unsigned char SlackTextViewControllerVersionString[];
 #import <SlackTextViewController/SLKTextView+SLKAdditions.h>
 #import <SlackTextViewController/UIResponder+SLKAdditions.h>
 
-#import <SlackTextViewController/TCTextViewController.h>
 #import <SlackTextViewController/MessagingTextInputbar.h>

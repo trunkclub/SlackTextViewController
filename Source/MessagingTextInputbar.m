@@ -12,7 +12,7 @@
 
 - (CGFloat)appropriateHeight {
     CGFloat height = super.appropriateHeight;
-    return height + 20.0f;
+    return height + self.addedHeight;
 }
 
 @end

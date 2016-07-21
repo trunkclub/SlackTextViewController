@@ -18,6 +18,7 @@
 #import "SLKInputAccessoryView.h"
 
 #import "UIResponder+SLKAdditions.h"
+#import "MessagingTextInputBar.h"
 
 /** Feature flagged while waiting to implement a more reliable technique. */
 #define SLKBottomPanningEnabled 0
@@ -164,6 +165,8 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 
     self.automaticallyAdjustsScrollViewInsets = YES;
     self.extendedLayoutIncludesOpaqueBars = YES;
+    
+    self.customToolbarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
 }
 
 
@@ -311,7 +314,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 - (SLKTextInputbar *)textInputbar
 {
     if (!_textInputbar) {
-        _textInputbar = [[SLKTextInputbar alloc] initWithTextViewClass:self.textViewClass];
+        _textInputbar = [[MessagingTextInputbar alloc] initWithTextViewClass:self.textViewClass];
         _textInputbar.translatesAutoresizingMaskIntoConstraints = NO;
         [_textInputbar.leftButton addTarget:self action:@selector(didPressLeftButton:) forControlEvents:UIControlEventTouchUpInside];
         [_textInputbar.rightButton addTarget:self action:@selector(didPressRightButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -2373,6 +2376,18 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     _autoCompletionViewHC = nil;
     _keyboardHC = nil;
     [self slk_unregisterNotifications];
+}
+
+#pragma mark - Custom Toolbar
+
+- (void)setCustomToolbarView:(UIView *)customToolbarView
+{
+    _customToolbarView = customToolbarView;
+    
+    MessagingTextInputbar *messagingBar = (MessagingTextInputbar*) self.textInputbar;
+    if ([messagingBar isKindOfClass:[MessagingTextInputbar class]]) {
+        messagingBar.addedHeight = customToolbarView.frame.size.height;
+    }
 }
 
 @end

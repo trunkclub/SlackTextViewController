@@ -125,6 +125,8 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController 
 @property (nonatomic, readonly) UIButton *leftButton;
 @property (nonatomic, readonly) UIButton *rightButton;
 
+/** Custom Toolbar */
+@property (nonatomic, retain) UIView *customToolbarView;
 
 #pragma mark - Initialization
 ///------------------------------------------------

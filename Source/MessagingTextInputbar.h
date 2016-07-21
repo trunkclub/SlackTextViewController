@@ -10,4 +10,6 @@
 
 @interface MessagingTextInputbar : SLKTextInputbar
 
+@property (nonatomic, assign) CGFloat addedHeight;
+
 @end
