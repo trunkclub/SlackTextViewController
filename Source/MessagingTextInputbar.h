@@ -11,5 +11,6 @@
 @interface MessagingTextInputbar : SLKTextInputbar
 
 @property (nonatomic, assign) CGFloat addedHeight;
+@property (nonatomic, readonly) UIView *customToolbarView;
 
 @end

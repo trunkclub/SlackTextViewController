@@ -166,7 +166,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     self.automaticallyAdjustsScrollViewInsets = YES;
     self.extendedLayoutIncludesOpaqueBars = YES;
     
-    self.customToolbarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+//    [self setCustomToolbarView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)]];
 }
 
 
@@ -2171,7 +2171,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[autoCompletionView]|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[typingIndicatorView]|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[textInputbar]|" options:0 metrics:nil views:views]];
-
+    
     self.scrollViewHC = [self.view slk_constraintForAttribute:NSLayoutAttributeHeight firstItem:self.scrollViewProxy secondItem:nil];
     self.autoCompletionViewHC = [self.view slk_constraintForAttribute:NSLayoutAttributeHeight firstItem:self.autoCompletionView secondItem:nil];
     self.typingIndicatorViewHC = [self.view slk_constraintForAttribute:NSLayoutAttributeHeight firstItem:self.typingIndicatorProxyView secondItem:nil];
@@ -2382,11 +2382,9 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 
 - (void)setCustomToolbarView:(UIView *)customToolbarView
 {
-    _customToolbarView = customToolbarView;
-    
     MessagingTextInputbar *messagingBar = (MessagingTextInputbar*) self.textInputbar;
     if ([messagingBar isKindOfClass:[MessagingTextInputbar class]]) {
-        messagingBar.addedHeight = customToolbarView.frame.size.height;
+//        messagingBar.customToolbarView = customToolbarView;
     }
 }
 
