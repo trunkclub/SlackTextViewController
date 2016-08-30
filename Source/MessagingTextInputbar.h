@@ -7,10 +7,12 @@
 //
 
 #import <SlackTextViewController/SLKTextInputbar.h>
+#import <SlackTextViewController/ToolbarAction.h>
+#import <SlackTextViewController/ToolbarActionView.h>
 
 @interface MessagingTextInputbar : SLKTextInputbar
 
 @property (nonatomic, assign) CGFloat addedHeight;
-@property (nonatomic, readonly) UIView *customToolbarView;
+@property (nonatomic, readonly) ToolbarActionView *customToolbarView;
 
 @end

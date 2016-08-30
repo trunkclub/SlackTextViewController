@@ -40,11 +40,11 @@ CGFloat const kCustomToolbarHeight = 40.0;
 
 - (void)slk_commonInit
 {
-    self.customToolbarView = [[TCCollectionViewSubclass alloc] init];
+    self.customToolbarView = [[ToolbarActionView alloc] init];
     [super slk_commonInit];
     [self insertSubview:self.customToolbarView aboveSubview:self.textView];
     
-    [self.customToolbarView setActions:actionArray];
+    [self.customToolbarView setActions:@[]];
 }
 
 - (void)slk_setupViewConstraints
@@ -107,9 +107,7 @@ CGFloat const kCustomToolbarHeight = 40.0;
 
 - (void)configureToolbar {
     [self addSubview:self.customToolbarView];
-    self.customToolbarView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.customToolbarView.backgroundColor = [UIColor redColor];
+    [self.customToolbarView setup];
 }
-
 
 @end

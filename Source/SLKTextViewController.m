@@ -165,8 +165,6 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 
     self.automaticallyAdjustsScrollViewInsets = YES;
     self.extendedLayoutIncludesOpaqueBars = YES;
-    
-//    [self setCustomToolbarView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)]];
 }
 
 
