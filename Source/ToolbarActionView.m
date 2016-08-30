@@ -43,9 +43,7 @@
 
 - (void)setActions:(NSArray *)actions
 {
-    for (action in actions) {
-        
-    }
+
 }
 
 @end
