@@ -309,7 +309,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     return _autoCompletionView;
 }
 
-- (SLKTextInputbar *)textInputbar
+- (MessagingTextInputbar *)textInputbar
 {
     if (!_textInputbar) {
         _textInputbar = [[MessagingTextInputbar alloc] initWithTextViewClass:self.textViewClass];
@@ -2374,16 +2374,6 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     _autoCompletionViewHC = nil;
     _keyboardHC = nil;
     [self slk_unregisterNotifications];
-}
-
-#pragma mark - Custom Toolbar
-
-- (void)setCustomToolbarView:(UIView *)customToolbarView
-{
-    MessagingTextInputbar *messagingBar = (MessagingTextInputbar*) self.textInputbar;
-    if ([messagingBar isKindOfClass:[MessagingTextInputbar class]]) {
-//        messagingBar.customToolbarView = customToolbarView;
-    }
 }
 
 @end

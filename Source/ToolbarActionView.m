@@ -10,40 +10,48 @@
 
 @implementation ToolbarActionView
 
-- (void) setup {
-    self.layoutMargins = UIEdgeInsetsMake(2, 20, 2, 20);
+@synthesize ghostView = _ghostView;
+
+- (UIView*) ghostView
+{
+    if (!_ghostView) {
+        _ghostView = [[UIView alloc] init];
+        
+        [_ghostView.heightAnchor constraintEqualToConstant: 36].active = true;
+        [_ghostView.widthAnchor constraintEqualToConstant:[UIScreen mainScreen].bounds.size.width].active = true;
+        [_ghostView setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+        _ghostView.backgroundColor = [UIColor clearColor];
+    }
+    return _ghostView;
+}
+
+- (void) setup
+{
+    self.layoutMargins = UIEdgeInsetsMake(0, 16, 0, 0);
     self.layoutMarginsRelativeArrangement = true;
     self.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    UIView *view1 = [[UIView alloc] init];
-    view1.backgroundColor = [UIColor blueColor];
-    [view1.heightAnchor constraintEqualToConstant:36].active = true;
-    [view1.widthAnchor constraintEqualToConstant:36].active = true;
-    
-    
-    UIView *view2 = [[UIView alloc] init];
-    view2.backgroundColor = [UIColor greenColor];
-    [view2.heightAnchor constraintEqualToConstant:36].active = true;
-    [view2.widthAnchor constraintEqualToConstant:36].active = true;
-    
-    UIView *view3 = [[UIView alloc] init];
-    view3.backgroundColor = [UIColor magentaColor];
-    [view3.heightAnchor constraintEqualToConstant:36].active = true;
-    [view3.widthAnchor constraintEqualToConstant:36].active = true;
-    
     self.axis = UILayoutConstraintAxisHorizontal;
     self.alignment = UIStackViewAlignmentLeading;
-    self.distribution = UIStackViewDistributionFillProportionally;
-    self.spacing = 10;
-    
-    [self addArrangedSubview:view1];
-    [self addArrangedSubview:view2];
-    [self addArrangedSubview:view3];
+    self.distribution = UIStackViewDistributionFill;
+    self.spacing = 5;
 }
 
 - (void)setActions:(NSArray *)actions
 {
+    for (UIView *arrangedSubview in self.arrangedSubviews) {
+        [arrangedSubview removeFromSuperview];
+    }
+    
+    for (ToolbarAction *action in actions) {
+        action.backgroundColor = [UIColor clearColor];
+        [action.heightAnchor constraintEqualToConstant:36].active = true;
+        [action.widthAnchor constraintEqualToConstant:36].active = true;
+        [action setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
 
+        [self addArrangedSubview:action];
+    }
+    
+    [self addArrangedSubview: self.ghostView];
 }
 
 @end

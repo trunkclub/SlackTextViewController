@@ -11,6 +11,8 @@
 
 @interface ToolbarActionView : UIStackView
 
+@property (nonatomic, readonly) UIView *ghostView;
+
 - (void)setup;
 - (void)setActions:(NSArray *)actions;
 
