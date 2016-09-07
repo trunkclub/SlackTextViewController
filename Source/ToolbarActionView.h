@@ -11,7 +11,7 @@
 
 @interface ToolbarActionView : UIStackView
 
-@property (nonatomic, readonly) UIView *ghostView;
+@property (nonatomic, readonly) UIView *spacerView;
 
 - (void)setup;
 - (void)setActions:(NSArray *)actions;

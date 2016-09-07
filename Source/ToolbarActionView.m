@@ -10,19 +10,19 @@
 
 @implementation ToolbarActionView
 
-@synthesize ghostView = _ghostView;
+@synthesize spacerView = _spacerView;
 
-- (UIView*) ghostView
+- (UIView*) spacerView
 {
-    if (!_ghostView) {
-        _ghostView = [[UIView alloc] init];
+    if (!_spacerView) {
+        _spacerView = [[UIView alloc] init];
         
-        [_ghostView.heightAnchor constraintEqualToConstant: 36].active = true;
-        [_ghostView.widthAnchor constraintEqualToConstant:[UIScreen mainScreen].bounds.size.width].active = true;
-        [_ghostView setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-        _ghostView.backgroundColor = [UIColor clearColor];
+        [_spacerView.heightAnchor constraintEqualToConstant: 36].active = true;
+        [_spacerView.widthAnchor constraintEqualToConstant:[UIScreen mainScreen].bounds.size.width].active = true;
+        [_spacerView setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+        _spacerView.backgroundColor = [UIColor clearColor];
     }
-    return _ghostView;
+    return _spacerView;
 }
 
 - (void) setup
@@ -51,7 +51,7 @@
         [self addArrangedSubview:action];
     }
     
-    [self addArrangedSubview: self.ghostView];
+    [self addArrangedSubview: self.spacerView];
 }
 
 @end
