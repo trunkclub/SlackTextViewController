@@ -43,8 +43,6 @@ CGFloat const kCustomToolbarHeight = 36.0;
     self.customToolbarView = [[ToolbarActionView alloc] init];
     [super slk_commonInit];
     [self insertSubview:self.customToolbarView aboveSubview:self.textView];
-    
-    [self.customToolbarView setActions:@[]];
 }
 
 - (void)slk_setupViewConstraints
@@ -52,20 +50,21 @@ CGFloat const kCustomToolbarHeight = 36.0;
     self.textView.clipsToBounds = NO;
     
     // Pull in existing constraints as we're not calling super
-    NSDictionary *views = @{@"textView": self.textView,
-                            @"leftButton": self.leftButton,
-                            @"rightButton": self.rightButton,
-                            @"contentView": self.editorContentView,
-                            @"charCountLabel": self.charCountLabel,
-                            @"customToolbarView" : self.customToolbarView
+    NSDictionary *views = @{@"textView"             : self.textView,
+                            @"leftButton"           : self.leftButton,
+                            @"rightButton"          : self.rightButton,
+                            @"contentView"          : self.editorContentView,
+                            @"charCountLabel"       : self.charCountLabel,
+                            @"customToolbarView"    : self.customToolbarView,
+                            @"actionsView"          : self.customToolbarView.actionsView
                             };
     
-    NSDictionary *metrics = @{@"top" : @(self.contentInset.top),
-                              @"bottom" : @(self.contentInset.bottom),
-                              @"left" : @(self.contentInset.left),
-                              @"right" : @(self.contentInset.right),
-                              @"right" : @(self.contentInset.right),
-                              @"toolbarHeight" : @(kCustomToolbarHeight),
+    NSDictionary *metrics = @{@"top"                : @(self.contentInset.top),
+                              @"bottom"             : @(self.contentInset.bottom),
+                              @"left"               : @(self.contentInset.left),
+                              @"right"              : @(self.contentInset.right),
+                              @"right"              : @(self.contentInset.right),
+                              @"toolbarHeight"      : @(kCustomToolbarHeight),
                               };
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(left)-[leftButton(0)]-(<=1)-[textView]-(<=right)-[rightButton(0)]-(right)-|" options:0 metrics:metrics views:views]];
@@ -79,6 +78,9 @@ CGFloat const kCustomToolbarHeight = 36.0;
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[customToolbarView(toolbarHeight@500)]-0-|" options:0 metrics:metrics views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[customToolbarView]|" options:0 metrics:metrics views:views]];
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[actionsView]|" options:0 metrics:metrics views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[actionsView]|" options:0 metrics:metrics views:views]];
     
     self.editorContentViewHC = [self slk_constraintForAttribute:NSLayoutAttributeHeight firstItem:self.editorContentView secondItem:nil];
     

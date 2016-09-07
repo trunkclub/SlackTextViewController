@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ToolbarAction.h"
 
-@interface ToolbarActionView : UIStackView
+@interface ToolbarActionView : UIView
 
+@property (nonatomic, readonly) UIStackView *actionsView;
 @property (nonatomic, readonly) UIView *spacerView;
 
 - (void)setup;

@@ -11,8 +11,9 @@
 @implementation ToolbarActionView
 
 @synthesize spacerView = _spacerView;
+@synthesize actionsView = _actionsView;
 
-- (UIView*) spacerView
+- (UIView*)spacerView
 {
     if (!_spacerView) {
         _spacerView = [[UIView alloc] init];
@@ -25,20 +26,31 @@
     return _spacerView;
 }
 
-- (void) setup
+- (UIView*)actionsView
 {
-    self.layoutMargins = UIEdgeInsetsMake(0, 16, 0, 0);
-    self.layoutMarginsRelativeArrangement = true;
+    if (!_actionsView) {
+        _actionsView = [[UIStackView alloc] init];
+    }
+    return _actionsView;
+}
+
+- (void)setup
+{
+    self.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
     self.translatesAutoresizingMaskIntoConstraints = NO;
-    self.axis = UILayoutConstraintAxisHorizontal;
-    self.alignment = UIStackViewAlignmentLeading;
-    self.distribution = UIStackViewDistributionFill;
-    self.spacing = 5;
+    self.actionsView.layoutMargins = UIEdgeInsetsMake(0, 16, 0, 0);
+    self.actionsView.layoutMarginsRelativeArrangement = true;
+    self.actionsView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.actionsView.axis = UILayoutConstraintAxisHorizontal;
+    self.actionsView.alignment = UIStackViewAlignmentLeading;
+    self.actionsView.distribution = UIStackViewDistributionFill;
+    self.actionsView.spacing = 5;
+    [self addSubview:self.actionsView];
 }
 
 - (void)setActions:(NSArray *)actions
 {
-    for (UIView *arrangedSubview in self.arrangedSubviews) {
+    for (UIView *arrangedSubview in self.actionsView.arrangedSubviews) {
         [arrangedSubview removeFromSuperview];
     }
     
@@ -48,10 +60,11 @@
         [action.widthAnchor constraintEqualToConstant:36].active = true;
         [action setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
 
-        [self addArrangedSubview:action];
+        [self.actionsView addArrangedSubview:action];
     }
     
-    [self addArrangedSubview: self.spacerView];
+    // Add spacer view with low content hugging priority to allow appropriate sizing of actions
+    [self.actionsView addArrangedSubview: self.spacerView];
 }
 
 @end
