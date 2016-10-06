@@ -107,7 +107,8 @@ CGFloat const kCustomToolbarHeight = 36.0;
     [self configureToolbar];
 }
 
-- (void)configureToolbar {
+- (void)configureToolbar 
+{
     [self addSubview:self.customToolbarView];
     [self.customToolbarView setup];
 }
