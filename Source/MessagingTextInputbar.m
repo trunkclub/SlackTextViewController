@@ -33,7 +33,8 @@ CGFloat const kCustomToolbarHeight = 36.0;
 
 @synthesize customToolbarView = _customToolbarView;
 
-- (CGFloat)appropriateHeight {
+- (CGFloat)appropriateHeight
+{
     CGFloat height = super.appropriateHeight;
     return height + kCustomToolbarHeight;
 }
