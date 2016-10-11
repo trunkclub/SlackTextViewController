@@ -25,6 +25,7 @@
 #import "SLKTextView+SLKAdditions.h"
 #import "UIScrollView+SLKAdditions.h"
 #import "UIView+SLKAdditions.h"
+#import "MessagingTextInputbar.h"
 
 #import "SLKUIConstants.h"
 
@@ -65,7 +66,7 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController 
 @property (nonatomic, readonly) UIScrollView *scrollView;
 
 /** The bottom toolbar containing a text view and buttons. */
-@property (nonatomic, readonly) SLKTextInputbar *textInputbar;
+@property (nonatomic, readonly) MessagingTextInputbar *textInputbar;
 
 /** The default typing indicator used to display user names horizontally. */
 @property (nonatomic, readonly) SLKTypingIndicatorView *typingIndicatorView;
@@ -124,7 +125,6 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController 
 @property (nonatomic, readonly) SLKTextView *textView;
 @property (nonatomic, readonly) UIButton *leftButton;
 @property (nonatomic, readonly) UIButton *rightButton;
-
 
 #pragma mark - Initialization
 ///------------------------------------------------
