@@ -16,6 +16,7 @@ CGFloat const kCustomToolbarHeight = 36.0;
 
 - (void) slk_setupViewConstraints;
 - (void) slk_commonInit;
+- (void) animateRightButton:(BOOL)hidden;
 @property (nonatomic, retain) UIView *customToolbarView;
 @property (nonatomic, strong) NSLayoutConstraint *leftButtonWC;
 @property (nonatomic, strong) NSLayoutConstraint *leftButtonHC;
@@ -49,7 +50,7 @@ CGFloat const kCustomToolbarHeight = 36.0;
 - (void)slk_setupViewConstraints
 {
     self.textView.clipsToBounds = NO;
-    
+
     // Pull in existing constraints as we're not calling super
     NSDictionary *views = @{@"textView"             : self.textView,
                             @"leftButton"           : self.leftButton,
@@ -59,7 +60,7 @@ CGFloat const kCustomToolbarHeight = 36.0;
                             @"customToolbarView"    : self.customToolbarView,
                             @"actionsView"          : self.customToolbarView.actionsView
                             };
-    
+
     NSDictionary *metrics = @{@"top"                : @(self.contentInset.top),
                               @"bottom"             : @(self.contentInset.bottom),
                               @"left"               : @(self.contentInset.left),
@@ -67,34 +68,34 @@ CGFloat const kCustomToolbarHeight = 36.0;
                               @"right"              : @(self.contentInset.right),
                               @"toolbarHeight"      : @(kCustomToolbarHeight),
                               };
-    
+
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(left)-[leftButton(0)]-(<=1)-[textView]-(<=right)-[rightButton(0)]-(right)-|" options:0 metrics:metrics views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[leftButton(0)]-(0@750)-|" options:0 metrics:metrics views:views]];
-    
+
     // This sets alignment of right button to the top
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(<=0)-[rightButton]-(>=0)-|" options:0 metrics:metrics views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(left@250)-[charCountLabel(<=50@1000)]-(right@750)-|" options:0 metrics:metrics views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[contentView(0)]-(<=top)-[textView(0@999)]-(bottom)-|" options:0 metrics:metrics views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[contentView]|" options:0 metrics:metrics views:views]];
-    
+
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[customToolbarView(toolbarHeight@500)]-0-|" options:0 metrics:metrics views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[customToolbarView]|" options:0 metrics:metrics views:views]];
-    
+
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[actionsView]|" options:0 metrics:metrics views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[actionsView]|" options:0 metrics:metrics views:views]];
-    
+
     self.editorContentViewHC = [self slk_constraintForAttribute:NSLayoutAttributeHeight firstItem:self.editorContentView secondItem:nil];
-    
+
     // This hides the left button completely
     self.leftButtonWC = nil;
     self.leftButtonHC = nil;
-    
+
     self.leftMarginWC = [self slk_constraintsForAttribute:NSLayoutAttributeLeading][0];
     self.bottomMarginWC = [self slk_constraintForAttribute:NSLayoutAttributeBottom firstItem:self secondItem:self.leftButton];
-    
+
     self.rightButtonWC = [self slk_constraintForAttribute:NSLayoutAttributeWidth firstItem:self.rightButton secondItem:nil];
     self.rightMarginWC = [self slk_constraintsForAttribute:NSLayoutAttributeTrailing][0];
-    
+
     self.rightButtonTopMarginC = [self slk_constraintForAttribute:NSLayoutAttributeTop firstItem:self.rightButton secondItem:self];
     self.rightButtonBottomMarginC = [self slk_constraintForAttribute:NSLayoutAttributeBottom firstItem:self secondItem:self.rightButton];
 }
@@ -108,10 +109,16 @@ CGFloat const kCustomToolbarHeight = 36.0;
     [self configureToolbar];
 }
 
-- (void)configureToolbar 
+- (void)configureToolbar
 {
     [self addSubview:self.customToolbarView];
     [self.customToolbarView setup];
+}
+
+- (void)animateRightButton:(BOOL)hidden
+{
+  [super animateRightButton:hidden];
+  [self layoutIfNeeded];
 }
 
 @end
