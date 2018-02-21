@@ -15,4 +15,6 @@
 @property (nonatomic, assign) CGFloat addedHeight;
 @property (nonatomic, readonly) ToolbarActionView *customToolbarView;
 
+- (void) animateRightButton:(BOOL)hidden;
+
 @end

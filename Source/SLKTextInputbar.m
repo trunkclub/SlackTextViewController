@@ -115,7 +115,7 @@ NSString * const SLKTextInputbarDidMoveNotification =   @"SLKTextInputbarDidMove
         return;
     }
 
-    [self slk_updateConstraintConstants];
+    // [self slk_updateConstraintConstants];
     [super layoutIfNeeded];
 }
 
@@ -511,6 +511,35 @@ NSString * const SLKTextInputbarDidMoveNotification =   @"SLKTextInputbarDidMove
     [self slk_updateConstraintConstants];
 }
 
+- (void)animateRightButton:(BOOL)hidden
+{
+
+    CGFloat rightButtonNewWidth = 0;
+    CGFloat rightButtonNewMargin = 0;
+    if (!hidden) {
+        rightButtonNewWidth = [self.rightButton intrinsicContentSize].width;
+        rightButtonNewMargin = self.contentInset.right;
+    }
+
+    // Only updates if the width did change
+    if (self.rightButtonWC.constant == rightButtonNewWidth) {
+        return;
+    }
+
+    self.rightButtonWC.constant = rightButtonNewWidth;
+    self.rightMarginWC.constant = rightButtonNewMargin;
+    [self.rightButton layoutIfNeeded]; // Avoids the right button to stretch when animating the constraint changes
+
+    BOOL bounces = self.bounces;
+
+    if (self.window) {
+        [self slk_animateLayoutIfNeededWithBounce:bounces options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionAllowUserInteraction animations:NULL];
+    }
+    else {
+        [self layoutIfNeeded];
+    }
+
+}
 
 #pragma mark - Character Counter
 
