@@ -516,6 +516,12 @@ NSString * const SLKTextInputbarDidMoveNotification =   @"SLKTextInputbarDidMove
 
     CGFloat rightButtonNewWidth = 0;
     CGFloat rightButtonNewMargin = 0;
+    CGFloat startingAlpha = 1;
+    CGFloat finalAlpha = hidden ? 0 : 1;
+    
+    //Show the button initially so that we can see the button animating
+    self.rightButton.alpha = startingAlpha;
+
     if (!hidden) {
         rightButtonNewWidth = [self.rightButton intrinsicContentSize].width;
         rightButtonNewMargin = self.contentInset.right;
@@ -523,6 +529,7 @@ NSString * const SLKTextInputbarDidMoveNotification =   @"SLKTextInputbarDidMove
 
     // Only updates if the width did change
     if (self.rightButtonWC.constant == rightButtonNewWidth) {
+        self.rightButton.alpha = finalAlpha;
         return;
     }
 
@@ -533,9 +540,12 @@ NSString * const SLKTextInputbarDidMoveNotification =   @"SLKTextInputbarDidMove
     BOOL bounces = self.bounces;
 
     if (self.window) {
-        [self slk_animateLayoutIfNeededWithBounce:bounces options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionAllowUserInteraction animations:NULL];
+        [self slk_animateLayoutIfNeededWithBounce:bounces options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.rightButton.alpha = finalAlpha;
+        } completion: nil];
     }
     else {
+        self.rightButton.alpha = finalAlpha;
         [self layoutIfNeeded];
     }
 
