@@ -328,6 +328,9 @@ NSString * const SLKTextInputbarDidMoveNotification =   @"SLKTextInputbarDidMove
     height -= self.textView.font.lineHeight;
     height += roundf(self.textView.font.lineHeight*numberOfLines);
     height += self.contentInset.top + self.contentInset.bottom;
+    if (height > UIScreen.mainScreen.bounds.size.height * 0.15) {
+        height = UIScreen.mainScreen.bounds.size.height * 0.15;
+    }
 
     return height;
 }
