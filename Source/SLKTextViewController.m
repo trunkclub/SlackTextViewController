@@ -668,6 +668,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     }
 
     CGFloat inputbarHeight = _textInputbar.appropriateHeight;
+    _textInputbar.textView.contentInset = UIEdgeInsetsMake(0, 0, 32, 0);
 
     _textInputbar.rightButton.enabled = [self canPressRightButton];
     _textInputbar.editorRightButton.enabled = [self canPressRightButton];
