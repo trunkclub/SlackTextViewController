@@ -38,13 +38,13 @@
 {
     self.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
     self.translatesAutoresizingMaskIntoConstraints = NO;
-    self.actionsView.layoutMargins = UIEdgeInsetsMake(0, 16, 0, 0);
+    self.actionsView.layoutMargins = UIEdgeInsetsMake(0, 10, 0, 0);
     self.actionsView.layoutMarginsRelativeArrangement = true;
     self.actionsView.translatesAutoresizingMaskIntoConstraints = NO;
     self.actionsView.axis = UILayoutConstraintAxisHorizontal;
     self.actionsView.alignment = UIStackViewAlignmentLeading;
     self.actionsView.distribution = UIStackViewDistributionFill;
-    self.actionsView.spacing = 5;
+    self.actionsView.spacing = 4;
     [self addSubview:self.actionsView];
 }
 
