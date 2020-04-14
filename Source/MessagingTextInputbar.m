@@ -10,7 +10,7 @@
 #import "SLKTextView+SLKAdditions.h"
 #import "UIView+SLKAdditions.h"
 
-CGFloat const kCustomToolbarHeight = 36.0;
+CGFloat const kCustomToolbarHeight = 52.0;
 
 @interface SLKTextInputbar (Private)
 
