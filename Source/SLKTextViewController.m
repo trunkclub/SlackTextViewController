@@ -420,17 +420,6 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 
 - (CGFloat)slk_appropriateBottomMargin
 {
-    // A bottom margin is required only if the view is extended out of it bounds
-    if ((self.edgesForExtendedLayout & UIRectEdgeBottom) > 0) {
-
-        UITabBar *tabBar = self.tabBarController.tabBar;
-
-        // Considers the bottom tab bar, unless it will be hidden
-        if (tabBar && !tabBar.hidden && !self.hidesBottomBarWhenPushed) {
-            return CGRectGetHeight(tabBar.frame);
-        }
-    }
-
     return 0.0;
 }
 
